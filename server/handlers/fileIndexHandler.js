@@ -7,10 +7,12 @@ async function fileIndexHandler(path = '') {
         .filesListFolder({ path })
         .then((fileList) => {
             fileList.result.entries.forEach((file) => {
+                // If "folder",recursively call the funcion until it encounters a file
                 if (file['.tag'] === 'folder') {
                     return fileIndexHandler(file.path_display);
                 }
 
+                // If tag equals file then donwload the neccessary file info as per requirement
                 dbx.filesDownload({ path: file.path_display })
                     .then((fileInfo) => {
                         const blob = fileInfo.result.fileBinary;
@@ -18,15 +20,18 @@ async function fileIndexHandler(path = '') {
                         const id = file.id;
                         const fileName = file.name;
 
+                        // Create a shared link for each file if not created already
                         dbx.sharingCreateSharedLinkWithSettings({
                             path: id,
                         })
                             .then((createdSharedFileLink) => {
                                 const url =
                                     createdSharedFileLink.result.links[0].url;
+                                // extract text
                                 textExtract(id, index, blob, url, fileName);
                             })
                             .catch((err) => {
+                                // Check if shared link already exists, then simply fetch it
                                 if (
                                     err.error.error['.tag'] ===
                                     'shared_link_already_exists'
@@ -39,6 +44,7 @@ async function fileIndexHandler(path = '') {
                                             const url =
                                                 sharedFileLink.result.links[0]
                                                     .url;
+                                            // extract text
                                             textExtract(
                                                 id,
                                                 index,
