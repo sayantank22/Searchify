@@ -9,9 +9,9 @@
 
 .search-input {
     padding-left: 10px;
-    margin-left: 25px;
+    margin-left: 50px;
     font-size: 1rem;
-    width: 300px;
+    width: 350px;
     height: 30px;
     border-radius: 20px;
 }
@@ -34,12 +34,15 @@
 .content-wrapper {
     display: flex;
     flex-direction: column;
-    text-align: left;
-    background: white;
-    width: 300px;
-    margin-left: 40.5%;
+    align-items: center;
+    text-align: center;
+}
+
+.content {
+    margin-right: 35px;
+    background-color: white;
+    width: 350px;
     border-radius: 3px;
-    flex-wrap: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }

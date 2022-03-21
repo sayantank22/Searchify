@@ -83,32 +83,37 @@ const Home = ({ isLoggedIn, setIsLoggedIn, accessToken, setAccessToken }) => {
                 </form>
             </div>
             <div
-                className={
-                    data?.length > 0 && searchTerm.length > 0
-                        ? 'content-wrapper'
-                        : ''
-                }
-                style={{ display: !(searchTerm.length > 0) && 'none' }}
+                className='content-wrapper'
+                style={{ display: 'flex', alignItems: 'center' }}
             >
-                {data &&
-                    data.length > 0 &&
-                    data.map((data) => (
-                        <div className='dataResults'>
-                            <ul key={data._source.id}>
-                                <span>
-                                    <Link
-                                        className='dataItem'
-                                        to={'#'}
-                                        onClick={() =>
-                                            openInNewTab(data._source.url)
-                                        }
-                                    >
-                                        <span>{data._source.fileName}</span>
-                                    </Link>
-                                </span>
-                            </ul>
-                        </div>
-                    ))}
+                <div
+                    className={
+                        data?.length > 0 && searchTerm.length > 0
+                            ? 'content'
+                            : ''
+                    }
+                    style={{ display: !(searchTerm.length > 0) && 'none' }}
+                >
+                    {data &&
+                        data.length > 0 &&
+                        data.map((data) => (
+                            <div className='dataResults'>
+                                <ul key={data._source.id}>
+                                    <span>
+                                        <Link
+                                            className='dataItem'
+                                            to={'#'}
+                                            onClick={() =>
+                                                openInNewTab(data._source.url)
+                                            }
+                                        >
+                                            <span>{data._source.fileName}</span>
+                                        </Link>
+                                    </span>
+                                </ul>
+                            </div>
+                        ))}
+                </div>
             </div>
         </React.Fragment>
     ) : (
