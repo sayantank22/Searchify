@@ -46,9 +46,9 @@ router.post('/files', async (req, res) => {
     }
 });
 
-router.get('/files/:search', async (req, res) => {
+router.get('/files/search', async (req, res) => {
     try {
-        const term = req.params.search;
+        const term = req.query.q;
         const index = 'files';
         const result = await searchIndex(index, term);
         res.status(200).json({ res: result });

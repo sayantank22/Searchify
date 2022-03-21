@@ -36,7 +36,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn, accessToken, setAccessToken }) => {
         e.preventDefault();
 
         axios
-            .get(`http://localhost:5000/api/v1/files/${searchTerm}`)
+            .get(`http://localhost:5000/api/v1/files/search?q=${searchTerm}`)
             .then((res) => {
                 setData(res.data.res);
             });
