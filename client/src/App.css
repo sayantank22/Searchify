@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-image: linear-gradient(90deg, #824fac, #24c4b6);
+    color: white;
+    text-align: center;
+}
+
+button {
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 6px 15px;
+}
