@@ -39,11 +39,10 @@ router.get('/auth', async (req, res) => {
 
 router.post('/files', async (req, res) => {
     try {
-        const access_token = req.headers.access_token;
-        const response = await fileIndexHandler('', access_token);
+        const response = await fileIndexHandler('');
         res.status(201).json({ msg: response });
     } catch (error) {
-        res.json({ error });
+        res.json({ error: 'Something went wrong. Please try again!' });
     }
 });
 
@@ -54,17 +53,16 @@ router.get('/files/:search', async (req, res) => {
         const result = await searchIndex(index, term);
         res.status(200).json({ res: result });
     } catch (error) {
-        res.json({ error });
+        res.json({ error: 'Something went wrong during file search!' });
     }
 });
 
 router.delete('/files', async (req, res) => {
     try {
-        const access_token = req.headers.access_token;
         await deleteIndex('files');
         res.status(200).json({ msg: 'Index successfully deleted!' });
     } catch (error) {
-        res.json({ error });
+        res.json({ error: 'Something went wrong while deleting file index!' });
     }
 });
 
