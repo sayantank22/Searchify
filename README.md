@@ -23,7 +23,7 @@ Text based file searching using dropbox-api
 
 -   [General info](#general-info)
 -   [Technologies](#technologies)
--   [Setup](#setup)
+-   [Usage and Setup](#usage-and-setup)
 
 ## General info
 
@@ -31,11 +31,12 @@ A basic web-based file search service that can search documents from cloud stora
 
 ## Technologies
 
-Project is created with:
+Project is created primarily with:
 
--   Lorem version: 12.3
--   Ipsum version: 2.33
--   Ament library version: 999
+-   React JS
+-   Node Js
+-   Elastic Search
+-   Apache Tika
 
 ## Usage and Setup
 
