@@ -64,21 +64,21 @@ To run this project locally, follow the steps below:
 
 ```
     docker pull docker.elastic.co/elasticsearch/elasticsearch:8.1.1
-    $ docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.15.2
+    docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.15.2
 ```
 
 -   To start the frontend run
 
 ```
-    $ cd client
-    $ npm start
+    cd client
+    npm start
 ```
 
 -   To start the backend server run
 
 ```
-    $ cd server
-    $ npm run dev
+    cd server
+    npm run dev
 ```
 
 -   Your app is up and running, happy searching!
