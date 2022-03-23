@@ -17,7 +17,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn, accessToken, setAccessToken }) => {
                     access_token: accessToken,
                 },
             }).then((res) => {
-                if (res.data.msg === 'Files indexed successfully')
+                if (res.data.msg === 'Files indexed successfully!')
                     setIsLoading(false);
             });
         }
