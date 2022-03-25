@@ -5,8 +5,9 @@ Text based file searching using dropbox-api
 ## Features
 
 -   Sign in via Dropbox.
--   Search for any document just by typing the searh term in the search bar and hitting enter. It will list out all the files maching the search term in a dropnow.
-    From the dropdown list select the file that you want to open. It will open the file in a separate window redierc
+-   Use the search bar to search for the documents based on the text content that you entered on the input search bar.
+    In order to view the document click on the file name from the dropdown list and it will open the target file in a
+    separate window.
 -   Logout of the system using logout button.
 
 ## Screenshots
@@ -35,8 +36,6 @@ Project is created primarily with:
 
 -   React JS
 -   Node Js
--   Elastic Search
--   Apache Tika
 
 ## Usage and Setup
 
