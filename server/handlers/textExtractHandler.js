@@ -9,6 +9,8 @@ async function textExtract(id, index, stream, url, fileName) {
             url: 'http://localhost:9998/tika/text',
             data: stream,
             responseType: 'text/plain',
+            maxContentLength: Infinity,
+            maxBodyLength: Infinity,
             headers: {
                 'Content-Type': 'application/octet-stream',
             },
