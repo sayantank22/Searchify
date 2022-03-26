@@ -3,22 +3,21 @@ const dbx = require('../config/config');
 const textExtract = require('./textExtractHandler');
 
 async function fileIndexHandler(path = '') {
-    const fileList = await dbx.filesListFolder({ path });
+    const fileList = await dbx.filesListFolder({ path, recursive: true });
 
     const filesDownloadPromises = [];
     const ids = [];
     const fileNames = [];
 
     for (const file of fileList.result.entries) {
-        if (file['.tag'] === 'folder') {
-            return await fileIndexHandler(file.path_display);
-        }
-        ids.push(file.id);
-        fileNames.push(file.name);
+        if (file['.tag'] === 'file') {
+            ids.push(file.id);
+            fileNames.push(file.name);
 
-        filesDownloadPromises.push(
-            dbx.filesDownload({ path: file.path_display })
-        );
+            filesDownloadPromises.push(
+                dbx.filesDownload({ path: file.path_display })
+            );
+        }
     }
 
     const downloadResults = await Promise.all(filesDownloadPromises);
@@ -36,8 +35,8 @@ async function fileIndexHandler(path = '') {
         );
     });
 
-    let createSharedFileLinkPromises = [];
-    let getSharedFileLinksPromises = [];
+    const createSharedFileLinkPromises = [];
+    const getSharedFileLinksPromises = [];
 
     let sharedLinkStatus = await Promise.allSettled(sharedLinkPromises);
 
