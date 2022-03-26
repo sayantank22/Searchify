@@ -46,25 +46,13 @@ To run this project locally, follow the steps below:
 -   Go into the server folder and run `npm install` to install the dependencies.
 -   Login to your Dropbox account and create an OAuth app and provide a `RedirectURI` e.g http://localhost:3000/login
 -   Create a .env file in the root folder and set these variables:
+
     ```
     CLIENT_ID=Your Client ID from Dropbbox
     CLIENT_SECRET=Your Client Secret from Dropbbox
     REDIRECT_URI=http://localhost:3000/login
     PORT=5000
     ```
--   Pull and run the latest Apache Tika Server docker image using the commands down below
-
-```
-    docker pull apache/tika:<version>
-    docker run -d -p 9998:9998 apache/tika:<version>
-```
-
--   Pull and run the latest Elastic Search docker image using the commands down below
-
-```
-    docker pull docker.elastic.co/elasticsearch/elasticsearch:8.1.1
-    docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.15.2
-```
 
 -   To start the frontend run
 
@@ -77,6 +65,7 @@ To run this project locally, follow the steps below:
 
 ```
     cd server
+    sudo docker-compose up
     npm run dev
 ```
 
