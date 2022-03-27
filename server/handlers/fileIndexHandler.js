@@ -2,9 +2,7 @@ const dbx = require('../config/config');
 
 const textExtract = require('./textExtractHandler');
 
-async function fileIndexHandler(path = '') {
-    const fileList = await dbx.filesListFolder({ path, recursive: true });
-
+const indexFiles = async function (fileList) {
     const filesDownloadPromises = [];
     const ids = [];
     const fileNames = [];
@@ -60,16 +58,41 @@ async function fileIndexHandler(path = '') {
     const getSharedFileLinks = await Promise.all(getSharedFileLinksPromises);
 
     for (let i = 0; i < getSharedFileLinks.length; i++) {
-        const url = getSharedFileLinks[i].result.links[0].url;
+        const url = getSharedFileLinks[i].result?.links[0].url;
         textExtract(ids[i], 'files', blobs[i], url, fileNames[i]);
     }
 
     for (let i = 0; i < createSharedFileLinks.length; i++) {
-        const url = createSharedFileLinks[i].result.links[0].url;
+        const url = createSharedFileLinks[i].result?.links[0].url;
         textExtract(ids[i], 'files', blobs[i], url, fileNames[i]);
     }
+};
 
-    return 'Files indexed successfully!';
+const getMoreFiles = async function (cursor, cb) {
+    const res = await dbx.filesListFolderContinue({ cursor });
+
+    if (cb) {
+        await cb(res);
+    }
+
+    if (res.result.has_more) {
+        await getMoreFiles(res.result.cursor, cb);
+    }
+};
+
+async function fileIndexHandler(path = '') {
+    const fileList = await dbx.filesListFolder({
+        path,
+        recursive: true,
+        limit: 10,
+    });
+
+    await indexFiles(fileList);
+
+    if (fileList.result.has_more) {
+        await getMoreFiles(fileList.result.cursor, indexFiles);
+        return 'Files indexed successfully!';
+    }
 }
 
 module.exports = fileIndexHandler;
