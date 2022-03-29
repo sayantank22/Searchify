@@ -59,12 +59,12 @@ const indexFiles = async function (fileList) {
 
     for (let i = 0; i < getSharedFileLinks.length; i++) {
         const url = getSharedFileLinks[i].result?.links[0].url;
-        textExtract(ids[i], 'files', blobs[i], url, fileNames[i]);
+        await textExtract(ids[i], 'files', blobs[i], url, fileNames[i]);
     }
 
     for (let i = 0; i < createSharedFileLinks.length; i++) {
         const url = createSharedFileLinks[i].result?.links[0].url;
-        textExtract(ids[i], 'files', blobs[i], url, fileNames[i]);
+        await textExtract(ids[i], 'files', blobs[i], url, fileNames[i]);
     }
 };
 

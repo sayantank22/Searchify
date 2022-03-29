@@ -23,7 +23,7 @@ async function textExtract(id, index, stream, url, fileName) {
             textContent: response.data['X-TIKA:content'].trim(),
         };
 
-        createIndex(index, document);
+        await createIndex(index, document);
     } catch (error) {
         console.log(error);
     }
